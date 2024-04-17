@@ -37,17 +37,18 @@ class _QuizPageState extends State<QuizPage> {
               onPressed: () {
                 print('true is clicked');
               },
-              style: const ButtonStyle(
-                  backgroundColor: MaterialStatePropertyAll(Colors.green),
-                  shape: MaterialStatePropertyAll(
+              style: ButtonStyle(
+                  backgroundColor:
+                      MaterialStatePropertyAll(Colors.green.shade300),
+                  shape: const MaterialStatePropertyAll(
                     RoundedRectangleBorder(
                       borderRadius: BorderRadius.zero,
                     ),
                   )),
-              child: const Text(
+              child: Text(
                 'true',
                 style: TextStyle(
-                  color: Colors.white,
+                  color: Colors.green.shade900,
                   fontSize: 20,
                 ),
               ),
@@ -61,17 +62,18 @@ class _QuizPageState extends State<QuizPage> {
               onPressed: () {
                 print('false is clicked');
               },
-              style: const ButtonStyle(
-                  backgroundColor: MaterialStatePropertyAll(Colors.red),
-                  shape: MaterialStatePropertyAll(
+              style: ButtonStyle(
+                  backgroundColor:
+                      MaterialStatePropertyAll(Colors.red.shade300),
+                  shape: const MaterialStatePropertyAll(
                     RoundedRectangleBorder(
                       borderRadius: BorderRadius.zero,
                     ),
                   )),
-              child: const Text(
+              child: Text(
                 'false',
                 style: TextStyle(
-                  color: Colors.white,
+                  color: Colors.red.shade900,
                   fontSize: 20,
                 ),
               ),
