@@ -8,8 +8,42 @@ class QuizPage extends StatefulWidget {
 }
 
 class _QuizPageState extends State<QuizPage> {
+  List<Widget> scorekeeper = [
+    const Icon(
+      Icons.check,
+      size: 15,
+      color: Colors.green,
+    ),
+  ];
+
   @override
   Widget build(BuildContext context) {
+    // ------------------------ SCOREKEEPER
+
+    void addTrueIcon() {
+      setState(() {
+        scorekeeper.add(
+          const Icon(
+            Icons.check,
+            size: 15,
+            color: Colors.green,
+          ),
+        );
+      });
+    }
+
+    void addFalseIcon() {
+      setState(() {
+        scorekeeper.add(
+          const Icon(
+            Icons.close,
+            size: 15,
+            color: Colors.red,
+          ),
+        );
+      });
+    }
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -34,9 +68,7 @@ class _QuizPageState extends State<QuizPage> {
           child: Padding(
             padding: const EdgeInsets.all(15),
             child: TextButton(
-              onPressed: () {
-                print('true is clicked');
-              },
+              onPressed: addTrueIcon,
               style: ButtonStyle(
                   backgroundColor:
                       MaterialStatePropertyAll(Colors.green.shade300),
@@ -59,9 +91,7 @@ class _QuizPageState extends State<QuizPage> {
           child: Padding(
             padding: const EdgeInsets.all(15),
             child: TextButton(
-              onPressed: () {
-                print('false is clicked');
-              },
+              onPressed: addFalseIcon,
               style: ButtonStyle(
                   backgroundColor:
                       MaterialStatePropertyAll(Colors.red.shade300),
@@ -80,6 +110,9 @@ class _QuizPageState extends State<QuizPage> {
             ),
           ),
         ),
+        Row(
+          children: scorekeeper,
+        )
       ],
     );
   }
