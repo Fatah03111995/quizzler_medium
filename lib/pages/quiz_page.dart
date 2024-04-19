@@ -53,8 +53,6 @@ class _QuizPageState extends State<QuizPage> {
     }
 
     //---------------- end function buttons true and false
-
-    print(questions.length);
     bool isDone = questions.length > questionsIndex;
 
     return Column(
