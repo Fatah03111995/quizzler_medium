@@ -1,7 +1,9 @@
 import 'package:quizzler_medium/model/questions.dart';
 
 class QuestionsBank {
+  int _index = 0;
   final List<Questions> _questions = [
+    // underscore is mean the property is private, so you can not change the value in that properties
     Questions(
         question:
             'Bulan banyak bopengnya apakah tanda dulu pernah mengalami puber ?',
@@ -32,15 +34,31 @@ class QuestionsBank {
     Questions(question: 'Apakah hidup itu indah ?', answer: '1'),
   ];
 
-  List<Questions> get questions {
-    return _questions;
-  } // underscore is mean the property is private, so you can not change the value in that properties
-
-  String getQuestion(int index) {
-    return _questions[index].question;
+  bool isDone() {
+    if (_index < _questions.length) {
+      return false;
+    } else {
+      return true;
+    }
   }
 
-  String getAnswer(int index) {
-    return _questions[index].answer;
+  void nextQuestion() {
+    if (_index < _questions.length) {
+      _index++;
+    }
+  }
+
+  void previousQuestion() {
+    if (_index > 0) {
+      _index--;
+    }
+  }
+
+  String getQuestion() {
+    return _questions[_index].question;
+  }
+
+  String getAnswer() {
+    return _questions[_index].answer;
   }
 }

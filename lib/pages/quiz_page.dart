@@ -10,7 +10,6 @@ class QuizPage extends StatefulWidget {
 
 class _QuizPageState extends State<QuizPage> {
   List<Widget> scorekeeper = [];
-  int questionsIndex = 0;
   int point = 0;
   QuestionsBank questions = QuestionsBank();
 
@@ -28,7 +27,7 @@ class _QuizPageState extends State<QuizPage> {
           ),
         );
         point++;
-        questionsIndex++;
+        questions.nextQuestion();
       });
     }
 
@@ -41,12 +40,12 @@ class _QuizPageState extends State<QuizPage> {
             color: Colors.red,
           ),
         );
-        questionsIndex++;
+        questions.nextQuestion();
       });
     }
 
     void button({required String truefalse}) {
-      if (truefalse == questions.getAnswer(questionsIndex)) {
+      if (truefalse == questions.getAnswer()) {
         addTrueAnswerIcon();
       } else {
         addFalseAnswerIcon();
@@ -54,7 +53,7 @@ class _QuizPageState extends State<QuizPage> {
     }
 
     //---------------- end function buttons true and false
-    bool isDone = questions.questions.length > questionsIndex;
+    bool isDone = questions.isDone();
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -67,7 +66,7 @@ class _QuizPageState extends State<QuizPage> {
             child: Center(
               child: Text(
                 isDone
-                    ? questions.getAnswer(questionsIndex)
+                    ? questions.getAnswer()
                     : 'point benar anda adalah $point',
                 textAlign: TextAlign.center,
                 style: const TextStyle(
