@@ -55,9 +55,7 @@ class _QuizPageState extends State<QuizPage> {
     //---------------- end function buttons true and false
 
     print(questions.length);
-    String display = questions.length > questionsIndex
-        ? questions[questionsIndex]['question']
-        : 'point benar anda adalah $point';
+    bool isDone = questions.length > questionsIndex;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -69,7 +67,9 @@ class _QuizPageState extends State<QuizPage> {
             padding: const EdgeInsets.all(10),
             child: Center(
               child: Text(
-                display,
+                isDone
+                    ? questions[questionsIndex]['question']
+                    : 'point benar anda adalah $point',
                 textAlign: TextAlign.center,
                 style: const TextStyle(
                   color: Colors.white,
@@ -84,7 +84,7 @@ class _QuizPageState extends State<QuizPage> {
             padding: const EdgeInsets.all(15),
             child: TextButton(
               onPressed: () {
-                button(truefalse: '1');
+                isDone ? button(truefalse: '1') : null;
               },
               style: ButtonStyle(
                 backgroundColor:
@@ -110,7 +110,7 @@ class _QuizPageState extends State<QuizPage> {
             padding: const EdgeInsets.all(15),
             child: TextButton(
               onPressed: () {
-                button(truefalse: '0');
+                isDone ? button(truefalse: '0') : null;
               },
               style: ButtonStyle(
                 backgroundColor: MaterialStatePropertyAll(Colors.red.shade300),
