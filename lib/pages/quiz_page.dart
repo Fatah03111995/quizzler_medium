@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '/data/questions.dart';
 
 class QuizPage extends StatefulWidget {
   const QuizPage({super.key});
@@ -8,19 +9,15 @@ class QuizPage extends StatefulWidget {
 }
 
 class _QuizPageState extends State<QuizPage> {
-  List<Widget> scorekeeper = [
-    const Icon(
-      Icons.check,
-      size: 15,
-      color: Colors.green,
-    ),
-  ];
+  List<Widget> scorekeeper = [];
+  int questionsIndex = 0;
+  int point = 0;
 
   @override
   Widget build(BuildContext context) {
-    // ------------------------ SCOREKEEPER
+    // ------------------------ Functions Buttons True and False
 
-    void addTrueIcon() {
+    void addTrueAnswerIcon() {
       setState(() {
         scorekeeper.add(
           const Icon(
@@ -29,10 +26,12 @@ class _QuizPageState extends State<QuizPage> {
             color: Colors.green,
           ),
         );
+        point++;
+        questionsIndex++;
       });
     }
 
-    void addFalseIcon() {
+    void addFalseAnswerIcon() {
       setState(() {
         scorekeeper.add(
           const Icon(
@@ -41,22 +40,33 @@ class _QuizPageState extends State<QuizPage> {
             color: Colors.red,
           ),
         );
+        questionsIndex++;
       });
     }
+
+    void button({required String truefalse}) {
+      if (truefalse == questions[questionsIndex]['answer']) {
+        addTrueAnswerIcon();
+      } else {
+        addFalseAnswerIcon();
+      }
+    }
+
+    //---------------- end function buttons true and false
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        const Expanded(
+        Expanded(
           flex: 5,
           child: Padding(
-            padding: EdgeInsets.all(10),
+            padding: const EdgeInsets.all(10),
             child: Center(
               child: Text(
-                'This is where the text will go',
+                questions[questionsIndex]['question'],
                 textAlign: TextAlign.center,
-                style: TextStyle(
+                style: const TextStyle(
                   color: Colors.white,
                   fontSize: 25,
                 ),
@@ -68,15 +78,18 @@ class _QuizPageState extends State<QuizPage> {
           child: Padding(
             padding: const EdgeInsets.all(15),
             child: TextButton(
-              onPressed: addTrueIcon,
+              onPressed: () {
+                button(truefalse: '1');
+              },
               style: ButtonStyle(
-                  backgroundColor:
-                      MaterialStatePropertyAll(Colors.green.shade300),
-                  shape: const MaterialStatePropertyAll(
-                    RoundedRectangleBorder(
-                      borderRadius: BorderRadius.zero,
-                    ),
-                  )),
+                backgroundColor:
+                    MaterialStatePropertyAll(Colors.green.shade300),
+                shape: const MaterialStatePropertyAll(
+                  RoundedRectangleBorder(
+                    borderRadius: BorderRadius.zero,
+                  ),
+                ),
+              ),
               child: Text(
                 'true',
                 style: TextStyle(
@@ -91,15 +104,17 @@ class _QuizPageState extends State<QuizPage> {
           child: Padding(
             padding: const EdgeInsets.all(15),
             child: TextButton(
-              onPressed: addFalseIcon,
+              onPressed: () {
+                button(truefalse: '0');
+              },
               style: ButtonStyle(
-                  backgroundColor:
-                      MaterialStatePropertyAll(Colors.red.shade300),
-                  shape: const MaterialStatePropertyAll(
-                    RoundedRectangleBorder(
-                      borderRadius: BorderRadius.zero,
-                    ),
-                  )),
+                backgroundColor: MaterialStatePropertyAll(Colors.red.shade300),
+                shape: const MaterialStatePropertyAll(
+                  RoundedRectangleBorder(
+                    borderRadius: BorderRadius.zero,
+                  ),
+                ),
+              ),
               child: Text(
                 'false',
                 style: TextStyle(
