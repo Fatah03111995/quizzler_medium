@@ -35,4 +35,12 @@ class QuestionsBank {
   List<Questions> get questions {
     return _questions;
   } // underscore is mean the property is private, so you can not change the value in that properties
+
+  String getQuestion(int index) {
+    return _questions[index].question;
+  }
+
+  String getAnswer(int index) {
+    return _questions[index].answer;
+  }
 }

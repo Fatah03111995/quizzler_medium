@@ -12,6 +12,7 @@ class _QuizPageState extends State<QuizPage> {
   List<Widget> scorekeeper = [];
   int questionsIndex = 0;
   int point = 0;
+  QuestionsBank questions = QuestionsBank();
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +46,7 @@ class _QuizPageState extends State<QuizPage> {
     }
 
     void button({required String truefalse}) {
-      if (truefalse == questions[questionsIndex].answer) {
+      if (truefalse == questions.getAnswer(questionsIndex)) {
         addTrueAnswerIcon();
       } else {
         addFalseAnswerIcon();
@@ -53,7 +54,7 @@ class _QuizPageState extends State<QuizPage> {
     }
 
     //---------------- end function buttons true and false
-    bool isDone = questions.length > questionsIndex;
+    bool isDone = questions.questions.length > questionsIndex;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -66,7 +67,7 @@ class _QuizPageState extends State<QuizPage> {
             child: Center(
               child: Text(
                 isDone
-                    ? questions[questionsIndex].question
+                    ? questions.getAnswer(questionsIndex)
                     : 'point benar anda adalah $point',
                 textAlign: TextAlign.center,
                 style: const TextStyle(
