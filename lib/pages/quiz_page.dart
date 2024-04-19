@@ -45,7 +45,7 @@ class _QuizPageState extends State<QuizPage> {
     }
 
     void button({required String truefalse}) {
-      if (truefalse == questions[questionsIndex]['answer']) {
+      if (truefalse == questions[questionsIndex].answer) {
         addTrueAnswerIcon();
       } else {
         addFalseAnswerIcon();
@@ -66,7 +66,7 @@ class _QuizPageState extends State<QuizPage> {
             child: Center(
               child: Text(
                 isDone
-                    ? questions[questionsIndex]['question']
+                    ? questions[questionsIndex].question
                     : 'point benar anda adalah $point',
                 textAlign: TextAlign.center,
                 style: const TextStyle(
