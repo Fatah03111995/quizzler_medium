@@ -53,7 +53,7 @@ class _QuizPageState extends State<QuizPage> {
     }
 
     //---------------- end function buttons true and false
-    bool isDone = questions.isDone();
+    bool isDone = !questions.isDone();
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -66,7 +66,7 @@ class _QuizPageState extends State<QuizPage> {
             child: Center(
               child: Text(
                 isDone
-                    ? questions.getAnswer()
+                    ? questions.getQuestion()
                     : 'point benar anda adalah $point',
                 textAlign: TextAlign.center,
                 style: const TextStyle(
